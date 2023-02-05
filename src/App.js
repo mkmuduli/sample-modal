@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import ConfirmationModal from './component/ConfirmationModal';
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => { setOpen(true); };
+  const handleClose = () => { setOpen(false); };
+  const handleConfirm = () => { console.log("confirm clicked "); }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    < >
+      <ConfirmationModal
+        open={open}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        title="Unclosed Overdue Pay Runs"
+        description="Would you like to skip unclosed periods and start with this pay run (January 2023)?"
+        cancelButtonLabel="Back"
+        confirmButtonLabel="Skip Unclosed Periods" />
+      <Button variant="contained" onClick={handleClickOpen}>Open Modal</Button>
+    </>
   );
 }
 
